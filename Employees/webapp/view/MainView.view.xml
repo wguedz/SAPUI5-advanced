@@ -83,7 +83,7 @@ xmlns:core="sap.ui.core">
                                         </Column>                                                                                                                     
                                     </columns>
                                     <items>
-                                        <ColumnListItem type="Active" press="showPostalCode">
+                                        <ColumnListItem type="Active" press="showOrders">
                                             <cells>
                                                 <Label text="{jsonEmployees>EmployeeID}"/>
                                                 <Label text="{jsonEmployees>LastName}, {jsonEmployees>FirstName}"/>
@@ -93,6 +93,7 @@ xmlns:core="sap.ui.core">
                                         </ColumnListItem>
                                     </items>
                                 </Table>
+                                <HBox id="ordersTable"/>
                             </Panel>
                         </HBox>
                     </content>
