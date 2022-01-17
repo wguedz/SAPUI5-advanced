@@ -1,0 +1,59 @@
+<core:FragmentDefinition 
+xmlns:core="sap.ui.core"
+xmlns="sap.m">
+    <Panel>
+        <Button id="visibleBtnShowCity" 
+                text="{i18n>showCity}" 
+                class="sapUiSmallMarginEnd"
+                visible="{oJSONModelConfig>/visibleBtnShowCity}"
+                press="btnShowCity"/>
+
+        <Button id="visibleBtnHideCity" 
+                text="{i18n>hideCity}" 
+                class="sapUiSmallMarginEnd"
+                visible="{oJSONModelConfig>/visibleBtnHideCity}"
+                press="btnHideCity"/>
+
+        <Table id="tableEmployee" items="{jsonEmployees>/Employees}" >
+            <columns>
+                <Column visible="{oJSONModelConfig>/visibleID}"> 
+                    <header>
+                        <Label text="{i18n>TableID}"/> 
+                    </header>
+                </Column>
+                <Column visible="{oJSONModelConfig>/visibleName}">
+                    <header>
+                        <Label text="{i18n>TableName}"/> 
+                    </header>
+                </Column>      
+                <Column visible="{oJSONModelConfig>/visibleCountry}">
+                    <header>
+                        <Label text="{i18n>TableCountry}"/> 
+                    </header>
+                </Column>   
+                <Column visible="{oJSONModelConfig>/visibleCity}">
+                    <header>
+                        <Label text="{i18n>TableCity}"/> 
+                    </header>
+                </Column>    
+                <Column>
+                    <header>
+                        <Label text="{i18n>TableShowDetails}"/> 
+                </header>
+                </Column>                                                                                                                                   
+            </columns>
+            <items>
+                <ColumnListItem  >
+                    <cells>
+                        <Label text="{jsonEmployees>EmployeeID}"/>
+                        <Label text="{jsonEmployees>LastName}, {jsonEmployees>FirstName}"/>
+                        <Label text="{jsonEmployees>Country}"/>
+                        <Label text="{jsonEmployees>City}"/>
+                        <core:Icon src="sap-icon://show" press="showOrders"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+        <HBox id="ordersTable"/>
+    </Panel>
+</core:FragmentDefinition>

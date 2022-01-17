@@ -87,89 +87,22 @@ sap.ui.define([
         }
 
         function showOrders(oEvent){
+       
+            var iconPressed = oEvent.getSource();
 
-            var ordersTable = this.getView().byId("ordersTable");
-            
-            ordersTable.destroyItems(); 
+            var oContext = iconPressed.getBindingContext("jsonEmployees");
 
-            var itemPressed = oEvent.getSource();
-            var oContext = itemPressed.getBindingContext("jsonEmployees");
-            var ObjectContext = oContext.getObject();
-            var orders = ObjectContext.Orders;
-            //debugger;
-            var ordersItems = []; 
-            for (var i in orders){
+            if (!this._oDialogOrders){
+                this._oDialogOrders = sap.ui.xmlfragment("logaligroup.Employees.fragment.DialogOrders",this);
+                this.getView().addDependent(this._oDialogOrders);
+            }   
 
-                ordersItems.push(new sap.m.ColumnListItem({
-                    cells : [
-                        new sap.m.Label({text : orders[i].OrderID}),
-                        new sap.m.Label({text : orders[i].Freight}),
-                        new sap.m.Label({text : orders[i].ShipAddress}) 
-                    ]
-                }));
-                
-            }
+            this._oDialogOrders.bindElement("jsonEmployees>" + oContext.getPath());
+            this._oDialogOrders.open();
+        }
 
-            var newTable = new sap.m.Table({
-                width : "auto", 
-                columns : [
-                    new sap.m.Column({header : new sap.m.Label({text : "{i18n>OrderID}"})}), 
-                    new sap.m.Column({header : new sap.m.Label({text : "{i18n>Freight}"})}), 
-                    new sap.m.Column({header : new sap.m.Label({text : "{i18n>ShipAddress}"})})
-                ], 
-                items : ordersItems
-            }).addStyleClass("sapUiSmallMargin");
-
-            ordersTable.addItem(newTable);
-
-            /** */
-            var newTableJSON = new sap.m.Table();
-            newTableJSON.setWidth("auto");
-            newTableJSON.addStyleClass("sapUiSmallMargin");
-
-            var columnOrderID = new sap.m.Column();
-            var labelOrderID = new sap.m.Label();
-            labelOrderID.bindProperty("text","i18n>OrderID");
-            columnOrderID.setHeader(labelOrderID);
-            newTableJSON.addColumn(columnOrderID);
-
-            var columnFreight = new sap.m.Column();
-            var labelFreight = new sap.m.Label();
-            labelFreight.bindProperty("text","i18n>Freight");
-            columnFreight.setHeader(labelFreight);
-            newTableJSON.addColumn(columnFreight);
-
-            var columnShipAddress = new sap.m.Column();
-            var labelShipAddress = new sap.m.Label();
-            labelShipAddress.bindProperty("text","i18n>ShipAddress");
-            columnShipAddress.setHeader(labelShipAddress);
-            newTableJSON.addColumn(columnShipAddress);
-
-            var columnListItem = new sap.m.ColumnListItem();
-            
-            var cellOrderID = new sap.m.Label();
-            cellOrderID.bindProperty("text","jsonEmployees>OrderID");
-            columnListItem.addCell(cellOrderID);
-            
-            var cellFreight = new sap.m.Label();
-            cellFreight.bindProperty("text","jsonEmployees>Freight");
-            columnListItem.addCell(cellFreight);
-             
-            var cellShipAddress = new sap.m.Label();
-            cellShipAddress.bindProperty("text","jsonEmployees>ShipAddress");
-            columnListItem.addCell(cellShipAddress);
-
-            var oBindingInfo = {
-                model : "jsonEmployees", 
-                path : "Orders", 
-                template: columnListItem
-            };
-
-            newTableJSON.bindAggregation("items", oBindingInfo);
-            newTableJSON.bindElement("jsonEmployees>" + oContext.getPath());
-
-            ordersTable.addItem(newTableJSON);
-
+        function onCloseOrders(){
+            this._oDialogOrders.close();
         }
 
         var Main = Controller.extend("logaligroup.Employees.controller.MainView", {});
@@ -180,6 +113,7 @@ sap.ui.define([
         Main.prototype.onFilter       = onFilter;
         Main.prototype.onClearFilter  = onClearFilter;
         Main.prototype.showPostalCode = showPostalCode;
-        Main.prototype.showOrders     = showOrders; 
+        Main.prototype.showOrders     = showOrders;  
+        Main.prototype.onCloseOrders  = onCloseOrders;
         return Main;
     });

@@ -9,7 +9,6 @@ xmlns:core="sap.ui.core">
 				<Page id="page" title="{i18n>title}">
 					<content>
                         <HBox >
-
                             <Label id="labelEmployee" text="{i18n>labelEmployee}"
                             labelFor="inputEmployee" class="sapUiSmallMargin"/>
 
@@ -44,58 +43,7 @@ xmlns:core="sap.ui.core">
                                     press="onClearFilter"/>
                             
                         </HBox>
-                        <HBox>
-                            <Panel>
-
-                            <Button id="visibleBtnShowCity" 
-                                    text="{i18n>showCity}" 
-                                    class="sapUiSmallMarginEnd"
-                                    visible="{oJSONModelConfig>/visibleBtnShowCity}"
-                                    press="btnShowCity"/>
-
-                            <Button id="visibleBtnHideCity" 
-                                    text="{i18n>hideCity}" 
-                                    class="sapUiSmallMarginEnd"
-                                    visible="{oJSONModelConfig>/visibleBtnHideCity}"
-                                    press="btnHideCity"/>
-
-                                <Table id="tableEmployee" items="{jsonEmployees>/Employees}" >
-                                    <columns>
-                                        <Column visible="{oJSONModelConfig>/visibleID}"> 
-                                            <header>
-                                                <Label text="{i18n>TableID}"/> 
-                                            </header>
-                                        </Column>
-                                        <Column visible="{oJSONModelConfig>/visibleName}">
-                                            <header>
-                                                <Label text="{i18n>TableName}"/> 
-                                            </header>
-                                        </Column>      
-                                        <Column visible="{oJSONModelConfig>/visibleCountry}">
-                                            <header>
-                                                <Label text="{i18n>TableCountry}"/> 
-                                            </header>
-                                        </Column>   
-                                        <Column visible="{oJSONModelConfig>/visibleCity}">
-                                            <header>
-                                                <Label text="{i18n>TableCity}"/> 
-                                            </header>
-                                        </Column>                                                                                                                     
-                                    </columns>
-                                    <items>
-                                        <ColumnListItem type="Active" press="showOrders">
-                                            <cells>
-                                                <Label text="{jsonEmployees>EmployeeID}"/>
-                                                <Label text="{jsonEmployees>LastName}, {jsonEmployees>FirstName}"/>
-                                                <Label text="{jsonEmployees>Country}"/>
-                                                <Label text="{jsonEmployees>City}"/>
-                                            </cells>
-                                        </ColumnListItem>
-                                    </items>
-                                </Table>
-                                <HBox id="ordersTable"/>
-                            </Panel>
-                        </HBox>
+                        <core:Fragment fragmentName="logaligroup.Employees.fragment.TableEmployee" type="XML"/>
                     </content>
 				</Page>
 			</pages>
