@@ -43,7 +43,7 @@ xmlns="sap.m">
                 </Column>                                                                                                                                   
             </columns>
             <items>
-                <ColumnListItem  >
+                <ColumnListItem  type="Navigation" press="showEmployee">
                     <cells>
                         <Label text="{jsonEmployees>EmployeeID}"/>
                         <Label text="{jsonEmployees>LastName}, {jsonEmployees>FirstName}"/>

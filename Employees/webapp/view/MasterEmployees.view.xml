@@ -1,11 +1,9 @@
-<mvc:View controllerName="logaligroup.Employees.controller.MainView" 
+<mvc:View controllerName="logaligroup.Employees.controller.MasterEmployees" 
 xmlns:mvc="sap.ui.core.mvc" 
 displayBlock="true" 
 xmlns="sap.m"
 xmlns:core="sap.ui.core">
-	<Shell id="shell">
-		<App id="app">
-			<pages>
+
 				<Page id="page" title="{i18n>title}">
 					<content>
                         <HBox >
@@ -46,7 +44,4 @@ xmlns:core="sap.ui.core">
                         <core:Fragment fragmentName="logaligroup.Employees.fragment.TableEmployee" type="XML"/>
                     </content>
 				</Page>
-			</pages>
-		</App>
-	</Shell>
 </mvc:View>
